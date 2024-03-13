@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Net.NetworkInformation;
 
 namespace Application
 {
@@ -11,6 +7,8 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddMediatR(cfg =>
+                cfg.RegisterServicesFromAssembly(typeof(Ping).Assembly));
             return services;
         }
     }
