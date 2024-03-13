@@ -12,15 +12,15 @@ Clean architecture is a different take on the N-Layer architecture with the belo
 
 
 #### Domain Layer
-- Captures the business rules.
-- Use tactical design techniques from DDD to design
-**Entities** : Objects that can be identified using an ID
-**ValueObjects** : No sparate identity, if the values are same, then they are the same.
-**Aggregates** : This defines the transaction boundary. It is a group of entities and value objects. The aggregate has a root entities which is the means of commnucating with outside. Aggregate root is suppose to ensure the invariance and consistancy with in the aggregate. Do not create big aggregates, it will affect the performance of the system.
-**Services** : Domain services captures rules that does not fit into a entity or aggregate. For eg, rules that span across aggregates.
-**Events** : Invariances across aggregates are ensured using events and event handlers. The changes across aggregates are guaranteed to be consistant eventually.
-- Domain models should be desinged as solution to the problem at hand, not based on how the data will be stored. Data persistance should follow the model as it evovles.
-- Avoid Anaemic classes. Use good old object oriented techniques like abstraction, encapsulation etc to create rich model.
+- Domain layer captures business rules.
+- Uses tactical design techniques from DDD to design
+  - **Entities** : Objects that can be identified using an ID
+  - **ValueObjects** : No sparate identity, if the values are same, then they are the same.
+  - **Aggregates** : This defines the transaction boundary. It is a group of entities and value objects. The aggregate has a root entities which is the means of commnucating with outside. Aggregate root is suppose to ensure the invariance and consistancy with in the aggregate. Do not create big aggregates, it will affect the performance of the system.
+  - **Services** : Domain services captures rules that does not fit into a entity or aggregate. For eg, rules that span across aggregates.
+  - **Events** : Invariances across aggregates are ensured using events and event handlers. The changes across aggregates are guaranteed to be consistant eventually.
+- Domain models desinged as solution to the problem statement, not based on how the data will be stored. Data persistance should follow the model as it evovles.
+- Avoid Anemic classes. Use good old object oriented techniques like abstraction, encapsulation etc to create rich model.
 
 #### Application Layer
 - Orchestrates the use of domain model to capture business use cases
