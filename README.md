@@ -2,8 +2,7 @@
 A starter template for Clean Architecture solution in ASP.NET Core. It uses Domain Driven Design techinques to model the domain.
 
 
-Clean Architecture is a different take on the N-Layer architecture with a focus on decoupling and dependency inversion.  
-It pays off when you have complex business logic than for solutions that are more CRUD based.
+Clean Architecture is a different take on the N-Layer architecture with a focus on decoupling and dependency inversion. It pays off when you have complex business logic than for solutions that are more CRUD based.
 
 <img src="Images/clean-architecture.png" alt="Architecture Diagram" width="600"/>
 Image Credit [https://twitter.com/mjovanovictech/status/1719700976649572701]
