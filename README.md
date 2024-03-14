@@ -21,8 +21,8 @@ Main advantages of Clean Architecture are
 - Domain layer captures business rules.
 - Uses tactical design techniques from DDD to design
   - **Entities** : Objects that can be identified using an ID
-  - **ValueObjects** : No sparate identity, if the values are same, then they are the same.
-  - **Aggregates** : This defines the transaction boundary. It is a group of entities and value objects. The aggregate has a root entities which is the means of commnucating with outside. Aggregate root is suppose to ensure the invariance and consistancy with in the aggregate. Do not create big aggregates, it will affect the performance of the system.
+  - **ValueObjects** : No separate identity, if the values are same then they are treated as equal.
+  - **Aggregates** : The aggregates defines the transaction boundary. It is a group of entities and value objects. The aggregate has a root entity which interacts with interacts with the rest of the system. Aggregate root is suppose to ensure the invariance and consistancy with in the aggregate. Do not create big aggregates, it will affect the performance of the system.
   - **Services** : Domain services captures rules that does not fit into a entity or aggregate. For eg, rules that span across aggregates.
   - **Events** : Invariances across aggregates are ensured using events and event handlers. The changes across aggregates are guaranteed to be consistant eventually.
 - Domain models desinged as solution to the problem statement, not based on how the data will be stored. Data persistance should follow the model as it evovles.
