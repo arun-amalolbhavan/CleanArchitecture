@@ -1,10 +1,17 @@
 ## Clean Architecture
+A starter template for Clean Architecture solution in ASP.NET Core. It uses Domain Driven Design techinques to model the domain.
 
-![Architecture Diagram](Images/clean-architecture.png)
+
+Clean Architecture is a different take on the N-Layer architecture with a focus on decoupling and dependency inversion.  
+It pays off when you have complex business logic than for solutions that are more CRUD based.
+
+<img src="Images/clean-architecture.png" alt="Architecture Diagram" width="600"/>
 Image Credit [https://twitter.com/mjovanovictech/status/1719700976649572701]
+<br/>
+<br/>
 
-Clean architecture is a different take on the N-Layer architecture with the below advantages:
-1. Business Logic encapsulated in to Domain model
+Main advantages of Clean Architecture are
+1. Business Logic encapsulated into the Domain model
 2. Applicatoin layers takes care of orcestration and workflows
 3. Domain Layer has no dependency on Data Layer
 4. Better testability
@@ -30,10 +37,9 @@ Clean architecture is a different take on the N-Layer architecture with the belo
 #### Presentation Layer
 - Web API layer using ASP.NET Core minimal API
 - Uses the application layer to execute business use cases
-- No business logic in this layer, focus on web server concers like HTTP request/response, routing etc.
+- No business logic in this layer, focus on web server concerns like HTTP request/response, routing etc.
 
 #### Infrastructure Layer
 - This layer takes care of interfacing with external systems, like database, external APIs, message queues, storage etc.
-- Entityframework Core used as ORM tool. Code first migration used to generate the database from code.
-- Entityframework Core features allows us to keep the mapping and configuration separate form the entity model, allowing the flexibility to model the entities based on the business concerns and still use the same with Entityframework.
-- Implements the repository pattern.
+- Entityframework Core used as ORM tool. Code first migration to generate the database from code.
+- Entityframework Core features allows us to keep the ORM mapping and configuration separate form the entity model, allowing the flexibility to model the entities based on the business concerns rather than focuing on database mapping.
