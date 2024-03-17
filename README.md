@@ -29,7 +29,7 @@ Main advantages of Clean Architecture are
 - Avoid Anemic classes. Use good old object oriented techniques like abstraction, encapsulation etc to create rich model.
 
 #### Application Layer
-- Orchestrates the interaction within domain model to capture business use cases
+- Orchestrates the interaction among domain model to capture various business use cases.
 - Implements CQS (Command Query Segragation) pattern
 - Command operations makes use of the domain model enforcing the aggregate invariants,  while query operations are done directly without the overheads of the domain models.
 
