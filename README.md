@@ -1,5 +1,5 @@
 ## Clean Architecture
-A starter template for Clean Architecture solution in ASP.NET Core. It uses Domain Driven Design techinques to model the domain.
+A starter template for Clean Architecture solution in ASP.NET Core minimal API. Domain model is designed using Domain Driven Design techinques.
 
 
 Clean Architecture is a different take on the N-Layer architecture with a focus on decoupling and dependency inversion. It pays off when you have complex business logic than for solutions that are more CRUD based.
