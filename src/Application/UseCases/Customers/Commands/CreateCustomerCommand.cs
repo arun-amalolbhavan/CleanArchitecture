@@ -1,4 +1,5 @@
-﻿using Domain.Customers;
+﻿using Application.Interfaces.Repositories;
+using Domain.Customers;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Customers.Commands
 {
-    public class CreateCustomerCommand : IRequest<int>
+    public class CreateCustomerCommand : IRequest<Guid>
     {
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -19,11 +20,21 @@ namespace Application.UseCases.Customers.Commands
         }
     }
 
-    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, int>
+    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Guid>
     {
-        public Task<int> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+
+        private readonly ICustomerRepository _customerRepository;
+
+        public CreateCustomerCommandHandler(ICustomerRepository repository)
         {
-            throw new NotImplementedException();
+            _customerRepository = repository;
+        }
+
+        public async Task<Guid> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        {
+            var customer = request.CreateCustomer();
+            await _customerRepository.SaveNewCustomer(customer);
+            return customer.Id;
         }
     }
 }

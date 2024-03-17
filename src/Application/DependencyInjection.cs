@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Interfaces.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net.NetworkInformation;
 
 namespace Application
@@ -8,7 +9,7 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssembly(typeof(Ping).Assembly));
+                cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
             return services;
         }
     }

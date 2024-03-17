@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Repositories
 {
-    public interface ICustomerRepository: IRepository
+    public interface IRepository
     {
-        Task<Guid> SaveNewCustomer(Customer customer);
-
-        Task<Customer> GetCustomerAsync(Guid customerId);
+        Task<int> SaveChangesAsync();
     }
 }

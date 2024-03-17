@@ -7,8 +7,8 @@ namespace Domain.Customers
 {
     public class Customer : AggregateRoot
     {
-        private int _id;
-        public int Id => _id;
+        private Guid _id;
+        public Guid Id => _id;
 
         public string Name { get; private set; } = string.Empty;
         public string EmailAddress { get; private set; }
@@ -25,7 +25,7 @@ namespace Domain.Customers
             _deliveryAddresses = new List<DeliveryAddress>();
         }
 
-        public void AddDeliveryAddress(string fullname,
+        public DeliveryAddress AddDeliveryAddress(string fullname,
             string phoneNumber,
             string building,
             string street,
@@ -38,7 +38,17 @@ namespace Domain.Customers
             if (_deliveryAddresses.Count >= Constants.Customer.MAX_DELIVERY_ADDRESS_COUNT)
                 throw new DomainException(string.Format(Constants.Customer.DELIVERY_ADDRESS_LIMIT_EXCEPTION_MSG_TEMPLATE, Constants.Customer.MAX_DELIVERY_ADDRESS_COUNT));
 
-            _deliveryAddresses.Add(DeliveryAddress.Create(fullname, phoneNumber, building, street, landmark, pincode, city, state, deliveryInstruction));
+            var address = DeliveryAddress.Create(this.Id, fullname,
+                phoneNumber,
+                building,
+                street,
+                landmark,
+                pincode,
+                city,
+                state,
+                deliveryInstruction);
+            _deliveryAddresses.Add(address);
+            return address;
         }
 
     }

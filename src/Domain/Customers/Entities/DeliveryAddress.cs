@@ -12,6 +12,7 @@ namespace Domain.Customers.Entities
     {
         private Guid _id;
         public Guid Id => _id;
+        public Guid CutomerId { get; private set; }
         public string FullName { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;
         public string Building { get; private set; } = string.Empty;
@@ -23,7 +24,8 @@ namespace Domain.Customers.Entities
         public string DeliveryInstruction { get; private set; } = string.Empty;
 
         private DeliveryAddress() { }
-        private DeliveryAddress(string fullname,
+        private DeliveryAddress(Guid customerId,
+            string fullname,
             string phoneNumber,
             string building,
             string street,
@@ -33,6 +35,8 @@ namespace Domain.Customers.Entities
             string state,
             string deliveryInstruction)
         {
+            DomainException.ThrowIfEmpty(customerId, "Address.CustomerId");
+            DomainException.ThrowIfNullOrWhiteSpace(fullname, "Address.FullName");
             DomainException.ThrowIfNullOrWhiteSpace(fullname, "Address.FullName");
             DomainException.ThrowIfNullOrWhiteSpace(building, "Address.Building");
             DomainException.ThrowIfNullOrWhiteSpace(street, "Address.Street");
@@ -52,7 +56,8 @@ namespace Domain.Customers.Entities
             DeliveryInstruction = deliveryInstruction;
         }
 
-        public static DeliveryAddress Create(string fullname,
+        public static DeliveryAddress Create(Guid customerId, 
+            string fullname,
             string phoneNumber,
             string building,
             string street,
@@ -62,7 +67,7 @@ namespace Domain.Customers.Entities
             string state,
             string deliveryInstruction)
         {
-            return new DeliveryAddress(fullname, phoneNumber, building, street, landmark, pincode, city, state, deliveryInstruction);
+            return new DeliveryAddress(customerId, fullname, phoneNumber, building, street, landmark, pincode, city, state, deliveryInstruction);
         }
     }
 }

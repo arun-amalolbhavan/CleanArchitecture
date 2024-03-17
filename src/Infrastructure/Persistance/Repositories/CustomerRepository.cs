@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
 using Domain.Customers;
+using Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,18 +10,29 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance.Repositories
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : RepositoryBase, ICustomerRepository
     {
-        public AppDbContext DbContext { get; set; }
-        public CustomerRepository(AppDbContext context)
+        public CustomerRepository(AppDbContext context) : base(context)
         {
-            DbContext = context;
         }
-        public async Task<int> AddCustomerAsync(Customer customer)
+
+        public async Task<Guid> SaveNewCustomer(Customer customer)
         {
-            DbContext.Customers.Add(customer);
-            await DbContext.SaveChangesAsync();
+            _dbContext.Customers.Add(customer);
+            await SaveChangesAsync();
             return customer.Id;
+        }
+
+        public async Task<Customer> GetCustomerAsync(Guid customerId)
+        {
+            var query = from customer in _dbContext.Customers
+                           where customer.Id == customerId
+                           select customer;
+            var result = await query.Include(x => x.DeliveryAddresses).FirstOrDefaultAsync();
+
+            DomainException.ThrowIfNull(result, $"Customer Id ({customerId}) does not exist");
+
+            return result;
         }
     }
 }
